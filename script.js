@@ -3,26 +3,27 @@ var speedCanvas = document.getElementById('speedChart');
 Chart.defaults.global.defaultFontFamily = 'Lato';
 Chart.defaults.global.defaultFontSize = 15;
 
+let a1 = document.getElementById('isA1').value;
+let b1 = document.getElementById('isB1').value;
+let a2 = document.getElementById('isA2').value;
+let b2 = document.getElementById('isB2').value;
+let a3 = document.getElementById('isA3').value;
+let b3 = document.getElementById('isB3').value;
+let a4 = document.getElementById('isA4').value;
+let b4 = document.getElementById('isB4').value;
+let a5 = document.getElementById('isA5').value;
+let b5 = document.getElementById('isB5').value;
+let a6 = document.getElementById('isA6').value;
+let b6 = document.getElementById('isB6').value;
+let a7 = document.getElementById('isA7').value;
+let b7 = document.getElementById('isB7').value;
+let a8 = document.getElementById('isA8').value;
+let b8 = document.getElementById('isB8').value;
+
 let GraphA = [];
 let GraphB = [];
 
 async function Edit() {
-  let a1 = document.getElementById('isA1').value;
-  let b1 = document.getElementById('isB1').value;
-  let a2 = document.getElementById('isA2').value;
-  let b2 = document.getElementById('isB2').value;
-  let a3 = document.getElementById('isA3').value;
-  let b3 = document.getElementById('isB3').value;
-  let a4 = document.getElementById('isA4').value;
-  let b4 = document.getElementById('isB4').value;
-  let a5 = document.getElementById('isA5').value;
-  let b5 = document.getElementById('isB5').value;
-  let a6 = document.getElementById('isA6').value;
-  let b6 = document.getElementById('isB6').value;
-  let a7 = document.getElementById('isA7').value;
-  let b7 = document.getElementById('isB7').value;
-  let a8 = document.getElementById('isA8').value;
-  let b8 = document.getElementById('isB8').value;
   let znachA = [a1, a2, a3, a4, a5, a6, a7, a8];
   let forSortA = [a1, a2, a3, a4, a5, a6, a7, a8];
   let znachB = [b1, b2, b3, b4, b5, b6, b7, b8];

@@ -20,7 +20,6 @@
   position: relative;
   top: 80px;
   left: 50px;
-  margin-bottom: 20%;
 }
 
 .editButton button {
@@ -106,4 +105,33 @@ th {
 
 .table input {
   width: 50px;
+}
+
+.alpha {
+  position: relative;
+  top: 250px;
+  right: 150px;
+  font-size: 18px;
+}
+
+.alpha input {
+  width: 25px;
+}
+
+.alpha button {
+  display: flex;
+  cursor: pointer;
+  width: 100px;
+  height: 45px;
+  border-radius: 10px;
+  outline: none;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  margin-left: 25px;
+}
+
+.alpha button:hover {
+  cursor: pointer;
+  background-color: azure;
 }
