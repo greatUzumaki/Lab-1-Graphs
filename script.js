@@ -3,41 +3,40 @@ var speedCanvas = document.getElementById('speedChart');
 Chart.defaults.global.defaultFontFamily = 'Lato';
 Chart.defaults.global.defaultFontSize = 15;
 
-let a1 = document.getElementById('isA1').value;
-let b1 = document.getElementById('isB1').value;
-let a2 = document.getElementById('isA2').value;
-let b2 = document.getElementById('isB2').value;
-let a3 = document.getElementById('isA3').value;
-let b3 = document.getElementById('isB3').value;
-let a4 = document.getElementById('isA4').value;
-let b4 = document.getElementById('isB4').value;
-let a5 = document.getElementById('isA5').value;
-let b5 = document.getElementById('isB5').value;
-let a6 = document.getElementById('isA6').value;
-let b6 = document.getElementById('isB6').value;
-let a7 = document.getElementById('isA7').value;
-let b7 = document.getElementById('isB7').value;
-let a8 = document.getElementById('isA8').value;
-let b8 = document.getElementById('isB8').value;
-
 let GraphA = [];
 let GraphB = [];
 
 async function Edit() {
-  let znachA = [a1, a2, a3, a4, a5, a6, a7, a8];
-  let forSortA = [a1, a2, a3, a4, a5, a6, a7, a8];
-  let znachB = [b1, b2, b3, b4, b5, b6, b7, b8];
-  let forSortB = [b1, b2, b3, b4, b5, b6, b7, b8];
+  let isA1 = document.getElementById('isA1').value;
+  let isB1 = document.getElementById('isB1').value;
+  let isA2 = document.getElementById('isA2').value;
+  let isB2 = document.getElementById('isB2').value;
+  let isA3 = document.getElementById('isA3').value;
+  let isB3 = document.getElementById('isB3').value;
+  let isA4 = document.getElementById('isA4').value;
+  let isB4 = document.getElementById('isB4').value;
+  let isA5 = document.getElementById('isA5').value;
+  let isB5 = document.getElementById('isB5').value;
+  let isA6 = document.getElementById('isA6').value;
+  let isB6 = document.getElementById('isB6').value;
+  let isA7 = document.getElementById('isA7').value;
+  let isB7 = document.getElementById('isB7').value;
+  let isA8 = document.getElementById('isA8').value;
+  let isB8 = document.getElementById('isB8').value;
+  let znachA = [isA1, isA2, isA3, isA4, isA5, isA6, isA7, isA8];
+  let forSortA = [isA1, isA2, isA3, isA4, isA5, isA6, isA7, isA8];
+  let znachB = [isB1, isB2, isB3, isB4, isB5, isB6, isB7, isB8];
+  let forSortB = [isB1, isB2, isB3, isB4, isB5, isB6, isB7, isB8];
   znachA = znachA.map(Number);
   znachB = znachB.map(Number);
   forSortA = forSortA.map(Number);
   forSortB = forSortB.map(Number);
-  forSortA.sort((a1, a2) => a1 - a2);
+  forSortA.sort((isA1, isA2) => isA1 - isA2);
   let minA, maxA, midA;
   minA = forSortA[0];
   maxA = forSortA[7];
   midA = (maxA + minA) / 2;
-  forSortB.sort((b1, b2) => b1 - b2);
+  forSortB.sort((isB1, isB2) => isB1 - isB2);
   let minB, maxB, midB;
   minB = forSortB[0];
   maxB = forSortB[7];
@@ -130,6 +129,40 @@ function Index() {
   document.getElementById('in9').value = 12;
   document.getElementById('in10').value = 12;
   alert('Успешно!');
+}
+
+function Srez() {
+  let a1 = document.getElementById('a1').value;
+  if (a1 == 0) alert('Нет значений!');
+  else {
+    let a2 = document.getElementById('a2').value;
+    let a3 = document.getElementById('a3').value;
+    let a4 = document.getElementById('a4').value;
+    let a5 = document.getElementById('a5').value;
+    let a6 = document.getElementById('a6').value;
+    let a7 = document.getElementById('a7').value;
+    let a8 = document.getElementById('a8').value;
+    let b1 = document.getElementById('b1').value;
+    let b2 = document.getElementById('b2').value;
+    let b3 = document.getElementById('b3').value;
+    let b4 = document.getElementById('b4').value;
+    let b5 = document.getElementById('b5').value;
+    let b6 = document.getElementById('b6').value;
+    let b7 = document.getElementById('b7').value;
+    let b8 = document.getElementById('b8').value;
+    let srez = document.getElementById('srez').value;
+    let A = [a1, a2, a3, a4, a5, a6, a7, a8];
+    let B = [b1, b2, b3, b4, b5, b6, b7, b8];
+    A = A.map(Number);
+    B = B.map(Number);
+    let srezA = A.filter((x) => x >= srez);
+    let srezB = B.filter((x) => x >= srez);
+    alert(
+      `Разложение множества A: \n ${srezA.join(
+        ' | '
+      )} \n Разложение множества B: \n ${srezB.join(' | ')} `
+    );
+  }
 }
 
 function Graph() {
