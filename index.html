@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lab1</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
+      integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body onload="Graph()">
+    <div class="chart">
+      <canvas id="speedChart"></canvas>
+    </div>
+    <div class="buttons">
+      <form>
+        <p><b>Функция</b></p>
+        <p>
+          <input name="func" type="radio" value="graph" id="f1" />Графики
+          множеств
+        </p>
+        <p><input name="func" type="radio" value="ob" id="f2" />Объединение</p>
+        <p><input name="func" type="radio" value="pe" id="f3" />Пересечение</p>
+        <p>
+          <input name="func" type="radio" value="raznA" id="f4" />Разность A и B
+        </p>
+        <p>
+          <input name="func" type="radio" value="raznB" id="f5" />Разность B и A
+        </p>
+        <p>
+          <input name="func" type="radio" value="dopA" id="f6" />Дополнение A
+        </p>
+        <p>
+          <input name="func" type="radio" value="dopB" id="f7" />Дополнение B
+        </p>
+        <p>
+          <input
+            type="button"
+            class="button"
+            value="Построить"
+            onclick="Func()"
+          />
+        </p>
+        <p>
+          <input
+            type="button"
+            class="button"
+            value="Убить график"
+            onclick="Kill()"
+          />
+        </p>
+      </form>
+      <form class="check">
+        <p><b>Проверка</b></p>
+        <p>
+          <input name="func" type="radio" value="AvB" id="p1" />A содержится в B
+        </p>
+        <p>
+          <input name="func" type="radio" value="BvA" id="p2" />B содержится в A
+        </p>
+        <p><input name="func" type="radio" value="ArB" id="p3" />A и B равны</p>
+        <p>
+          <input
+            type="button"
+            class="button"
+            value="Проверить"
+            onclick="Check()"
+          />
+        </p>
+      </form>
+    </div>
+    <div class="table">
+      <table border="1">
+        <tr>
+          <th>Автомат-автоукладчик</th>
+          <th>Часовая производительность</th>
+          <th>Установленная мощность</th>
+          <th>A</th>
+          <th>B</th>
+        </tr>
+        <tr>
+          <td>СМ-1030А</td>
+          <td><input value="3600" id="isA1" /></td>
+          <td><input value="2.2" id="isB1" /></td>
+          <td><input value="" readonly id="a1" /></td>
+          <td><input value="" readonly id="b1" /></td>
+        </tr>
+        <tr>
+          <td>СМС-1062</td>
+          <td><input value="3600" id="isA2" /></td>
+          <td><input value="1.7" id="isB2" /></td>
+          <td><input value="" readonly id="a2" /></td>
+          <td><input value="" readonly id="b2" /></td>
+        </tr>
+        <tr>
+          <td>СМ-19А</td>
+          <td><input value="4600" id="isA3" /></td>
+          <td><input value="2.75" id="isB3" /></td>
+          <td><input value="" readonly id="a3" /></td>
+          <td><input value="" readonly id="b3" /></td>
+        </tr>
+        <tr>
+          <td>ВСКО-9</td>
+          <td><input value="4000" id="isA4" /></td>
+          <td><input value="2.75" id="isB4" /></td>
+          <td><input value="" readonly id="a4" /></td>
+          <td><input value="" readonly id="b4" /></td>
+        </tr>
+        <tr>
+          <td>Дорстенер 203</td>
+          <td><input value="6000" id="isA5" /></td>
+          <td><input value="16" id="isB5" /></td>
+          <td><input value="" readonly id="a5" /></td>
+          <td><input value="" readonly id="b5" /></td>
+        </tr>
+        <tr>
+          <td>«Ротомат»</td>
+          <td><input value="5000" id="isA6" /></td>
+          <td><input value="8" id="isB6" /></td>
+          <td><input value="" readonly id="a6" /></td>
+          <td><input value="" readonly id="b6" /></td>
+        </tr>
+        <tr>
+          <td>Р-550</td>
+          <td><input value="5250" id="isA7" /></td>
+          <td><input value="11" id="isB7" /></td>
+          <td><input value="" readonly id="a7" /></td>
+          <td><input value="" readonly id="b7" /></td>
+        </tr>
+        <tr>
+          <td>«Атлас-Интертехник»</td>
+          <td><input value="7600" id="isA8" /></td>
+          <td><input value="10" id="isB8" /></td>
+          <td><input value="" readonly id="a8" /></td>
+          <td><input value="" readonly id="b8" /></td>
+        </tr>
+      </table>
+      <div class="editButton">
+        <button onclick="Edit()">Изменить</button>
+      </div>
+      <div class="wrap">
+        <div class="index">
+          <button onclick="Index()">Расчитать индексы</button>
+        </div>
+        <div class="inputs">
+          <ul>
+            <li>
+              Линейный индекс нечёткости множества A :<input
+                value=""
+                id="in1"
+                readonly
+              />
+            </li>
+            <li>
+              Линейный индекс нечёткости множества B :<input
+                value=""
+                id="in2"
+                readonly
+              />
+            </li>
+            <li>
+              Квадратичный индекс нечёткости множества A :<input
+                value=""
+                readonly
+                id="in3"
+              />
+            </li>
+            <li>
+              Квадратичный индекс нечёткости множества B :<input
+                value=""
+                readonly
+                id="in4"
+              />
+            </li>
+            <li>
+              Индекс нечёткости Егера множества A (p = 1) :<input
+                value=""
+                readonly
+                id="in5"
+              />
+            </li>
+            <li>
+              Индекс нечёткости Егера множества B (p = 1) :<input
+                value=""
+                readonly
+                id="in6"
+              />
+            </li>
+            <li>
+              Индекс нечёткости Егера множества A (p = 2) :<input
+                value=""
+                readonly
+                id="in7"
+              />
+            </li>
+            <li>
+              Индекс нечёткости Егера множества B (p = 2) :<input
+                value=""
+                readonly
+                id="in8"
+              />
+            </li>
+            <li>
+              Индекс нечёткости Коско множества A :<input
+                value=""
+                readonly
+                id="in9"
+              />
+            </li>
+            <li>
+              Индекс нечёткости Коско множества B :<input
+                value=""
+                readonly
+                id="in10"
+              />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

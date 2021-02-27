@@ -1,0 +1,109 @@
+.chart {
+  width: 1000px;
+  height: 50px;
+}
+
+.buttons {
+  display: flex;
+  position: relative;
+  bottom: 35px;
+  left: 68%;
+}
+
+.buttons .check {
+  margin-left: 50px;
+}
+
+.table {
+  display: flex;
+  text-align: center;
+  position: relative;
+  top: 80px;
+  left: 50px;
+  margin-bottom: 20%;
+}
+
+.editButton button {
+  display: flex;
+  height: 55px;
+  cursor: pointer;
+  border-radius: 10px;
+  outline: none;
+  align-items: center;
+}
+
+.editButton button:hover {
+  cursor: pointer;
+  border-radius: 10px;
+  background-color: azure;
+}
+
+.table table {
+  border-spacing: 5px 5px;
+}
+
+.table td,
+th {
+  padding: 4px 15px;
+  border: 1px solid #ccc;
+}
+
+.inputs {
+  display: flex;
+  margin-top: -30px;
+}
+
+.index {
+  display: flex;
+}
+
+.index button {
+  margin-top: -1px;
+  margin-bottom: 20px;
+  margin-left: 30px;
+  width: 400px;
+  height: 55px;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 10px;
+  outline: none;
+}
+
+.index button:hover {
+  margin-left: 30px;
+  width: 400px;
+  height: 55px;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 10px;
+  background-color: azure;
+}
+
+.buttons .button {
+  cursor: pointer;
+  width: 100px;
+  height: 45px;
+  border-radius: 10px;
+  outline: none;
+}
+
+.buttons .button:hover {
+  cursor: pointer;
+  width: 100px;
+  height: 45px;
+  border-radius: 10px;
+  background-color: azure;
+}
+
+.inputs input {
+  width: 30px;
+  margin-left: 10px;
+}
+
+.inputs li {
+  line-height: 35px;
+}
+
+.table input {
+  width: 50px;
+}
