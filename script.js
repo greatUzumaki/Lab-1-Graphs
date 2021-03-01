@@ -6,7 +6,8 @@ Chart.defaults.global.defaultFontSize = 15;
 let GraphA = [];
 let GraphB = [];
 
-async function Edit() {
+// Расчет данных
+function Edit() {
   let isA1 = document.getElementById('isA1').value;
   let isB1 = document.getElementById('isB1').value;
   let isA2 = document.getElementById('isA2').value;
@@ -59,6 +60,7 @@ async function Edit() {
   document.getElementById('b6').value = GraphB[5];
   document.getElementById('b7').value = GraphB[6];
   document.getElementById('b8').value = GraphB[7];
+  Graph();
 }
 
 function Sclass(x, a, b, c) {
@@ -81,6 +83,7 @@ function Pclass(x, max, mid) {
   }
 }
 
+// Функции
 function Func() {
   if (document.getElementById('f1').checked) {
     Graph();
@@ -99,12 +102,14 @@ function Func() {
   } else alert('Выберите функцию!');
 }
 
+// Сброс графика
 function Kill() {
   GraphA = [];
   GraphB = [];
   Graph();
 }
 
+// Проверка множеств
 function Check() {
   if (document.getElementById('p1').checked) {
     alert('done');
@@ -117,6 +122,7 @@ function Check() {
   } else alert('Выберите проверку!');
 }
 
+// Индексы
 function Index() {
   document.getElementById('in1').value = 12;
   document.getElementById('in2').value = 12;
@@ -131,6 +137,7 @@ function Index() {
   alert('Успешно!');
 }
 
+// Альфа срез
 function Srez() {
   let a1 = document.getElementById('a1').value;
   if (a1 == 0) alert('Нет значений!');
@@ -165,6 +172,7 @@ function Srez() {
   }
 }
 
+// Настройка графика
 function Graph() {
   var speedData = {
     labels: [
