@@ -4,6 +4,8 @@ Chart.defaults.global.defaultFontFamily = 'Lato';
 Chart.defaults.global.defaultFontSize = 15;
 Chart.defaults.global.elements.point.borderWidth = 3;
 
+let defGraphA = [];
+let defGraphB = [];
 let GraphA = [];
 let GraphB = [];
 let GraphC = [];
@@ -65,6 +67,8 @@ function Edit() {
   document.getElementById('b6').value = GraphB[5];
   document.getElementById('b7').value = GraphB[6];
   document.getElementById('b8').value = GraphB[7];
+  defGraphA = GraphA;
+  defGraphB = GraphB;
   Graph(false, false);
 }
 
@@ -92,6 +96,8 @@ function Pclass(x, max, mid) {
 function Func() {
   // График
   if (document.getElementById('f1').checked) {
+    GraphA = defGraphA;
+    GraphB = defGraphB;
     Graph(false, false, false);
   }
   // Объединение
@@ -125,13 +131,9 @@ function Func() {
   // Дополнение A
   else if (document.getElementById('f6').checked) {
     GraphA = GraphA.map(Number);
-    let forSort = GraphA;
-    forSort = forSort.map(Number);
-    forSort.sort((a, b) => a - b);
-    let max = forSort[7];
     GraphA = GraphA.map((x) => {
       let answer;
-      answer = max - x;
+      answer = Math.abs(x - 1);
       return answer.toFixed(3);
     });
     Graph(false, false, false);
@@ -139,13 +141,9 @@ function Func() {
   // Дополнение B
   else if (document.getElementById('f7').checked) {
     GraphB = GraphB.map(Number);
-    let forSort = GraphB;
-    forSort = forSort.map(Number);
-    forSort.sort((a, b) => a - b);
-    let max = forSort[7];
     GraphB = GraphB.map((x) => {
       let answer;
-      answer = max - x;
+      answer = Math.abs(x - 1);
       return answer.toFixed(3);
     });
     Graph(false, false, false);
@@ -175,17 +173,91 @@ function Check() {
 
 // Индексы
 function Index() {
-  document.getElementById('in1').value = 12;
-  document.getElementById('in2').value = 12;
-  document.getElementById('in3').value = 12;
-  document.getElementById('in4').value = 12;
-  document.getElementById('in5').value = 12;
-  document.getElementById('in6').value = 12;
+  GraphA = GraphA.map(Number);
+  GraphB = GraphB.map(Number);
+
+  let GraphAn = GraphA.map((x) => {
+    let answer;
+    answer = Math.abs(x - 1);
+    return answer.toFixed(3);
+  });
+  GraphAn = GraphAn.map(Number);
+
+  let GraphBn = GraphB.map((x) => {
+    let answer;
+    answer = Math.abs(x - 1);
+    return answer.toFixed(3);
+  });
+  GraphBn = GraphBn.map(Number);
+
+  function Min(arr1, arr2) {
+    let minArr = [];
+    for (let i = 0; i < arr1.length; i++) {
+      if (arr1[i] >= arr2[i]) {
+        minArr.push(arr2[i]);
+      } else minArr.push(arr1[i]);
+    }
+    return minArr;
+  }
+
+  function arraySum(array) {
+    let sum = 0;
+    for (let i = 0; i < array.length; i++) {
+      sum += array[i];
+    }
+    return sum;
+  }
+
+  function arraySumPow(array) {
+    let sum = 0;
+    for (let i = 0; i < array.length; i++) {
+      sum += Math.pow(array[i], 2);
+    }
+    return sum;
+  }
+
+  function Hamming(arr1, arr2) {
+    let sum = 0;
+    for (let i = 0; i < arr1.length; i++) {
+      sum += Math.abs(arr1[i] - arr2[i]);
+    }
+    return sum;
+  }
+
+  // Линейный индекс A
+  let minA = Min(GraphA, GraphAn);
+  let sumA = arraySum(minA);
+  let linA = (2 / 8) * sumA;
+  document.getElementById('in1').value = linA.toFixed(3);
+  // Линейный индекс B
+  let minB = Min(GraphB, GraphBn);
+  let sumB = arraySum(minB);
+  let linB = (2 / 8) * sumB;
+  document.getElementById('in2').value = linB.toFixed(3);
+  // Квадратичный индекс A
+  let sumPowA = arraySumPow(GraphA);
+  let kvadrA = (2 / Math.sqrt(8)) * Math.sqrt(sumPowA);
+  document.getElementById('in3').value = kvadrA.toFixed(3);
+  // Квадратичный индекс B
+  let sumPowB = arraySumPow(GraphB);
+  let kvadrB = (2 / Math.sqrt(8)) * Math.sqrt(sumPowB);
+  document.getElementById('in4').value = kvadrB.toFixed(3);
+  // Егер A p=1
+  let hamA = Hamming(GraphA, GraphAn);
+  let egerA1 = 1 - hamA / 8;
+  document.getElementById('in5').value = egerA1.toFixed(3);
+  // Егер B p=1
+  let hamB = Hamming(GraphB, GraphBn);
+  let egerB1 = 1 - hamB / 8;
+  document.getElementById('in6').value = egerB1.toFixed(3);
+  // Егер A p=2
   document.getElementById('in7').value = 12;
+  // Егер B p=2
   document.getElementById('in8').value = 12;
+  // Коско A
   document.getElementById('in9').value = 12;
+  // Коско B
   document.getElementById('in10').value = 12;
-  alert('Успешно!');
 }
 
 // Альфа срез
