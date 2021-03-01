@@ -2,9 +2,14 @@ var speedCanvas = document.getElementById('speedChart');
 
 Chart.defaults.global.defaultFontFamily = 'Lato';
 Chart.defaults.global.defaultFontSize = 15;
+Chart.defaults.global.elements.point.borderWidth = 3;
 
 let GraphA = [];
 let GraphB = [];
+let GraphC = [];
+
+let setFillA = false;
+let setFillB = false;
 
 // Расчет данных
 function Edit() {
@@ -60,7 +65,7 @@ function Edit() {
   document.getElementById('b6').value = GraphB[5];
   document.getElementById('b7').value = GraphB[6];
   document.getElementById('b8').value = GraphB[7];
-  Graph();
+  Graph(false, false);
 }
 
 function Sclass(x, a, b, c) {
@@ -85,19 +90,44 @@ function Pclass(x, max, mid) {
 
 // Функции
 function Func() {
+  // График
   if (document.getElementById('f1').checked) {
-    Graph();
-  } else if (document.getElementById('f2').checked) {
-    alert('Объединение');
-  } else if (document.getElementById('f3').checked) {
-    alert('Пересечение');
-  } else if (document.getElementById('f4').checked) {
+    Graph(false, false);
+  }
+  // Объединение
+  else if (document.getElementById('f2').checked) {
+    GraphA = GraphA.map(Number);
+    GraphB = GraphB.map(Number);
+    for (let i = 0; i < GraphB.length; i++) {
+      if (GraphA[i] <= GraphB[i]) GraphC.push(GraphB[i]);
+      else GraphC.push(GraphA[i]);
+    }
+    Graph(false, false, true);
+  }
+  // Пересечение
+  else if (document.getElementById('f3').checked) {
+    GraphA = GraphA.map(Number);
+    GraphB = GraphB.map(Number);
+    for (let i = 0; i < GraphB.length; i++) {
+      if (GraphA[i] >= GraphB[i]) GraphC.push(GraphB[i]);
+      else GraphC.push(GraphA[i]);
+    }
+    Graph(false, false, true);
+  }
+  // Разность A и B
+  else if (document.getElementById('f4').checked) {
     alert('Разность1');
-  } else if (document.getElementById('f5').checked) {
+  }
+  // Разность B и A
+  else if (document.getElementById('f5').checked) {
     alert('Разность2');
-  } else if (document.getElementById('f6').checked) {
+  }
+  // Дополнение A
+  else if (document.getElementById('f6').checked) {
     alert('Дополнение1');
-  } else if (document.getElementById('f7').checked) {
+  }
+  // Дополнение B
+  else if (document.getElementById('f7').checked) {
     alert('Дополнение2');
   } else alert('Выберите функцию!');
 }
@@ -106,7 +136,7 @@ function Func() {
 function Kill() {
   GraphA = [];
   GraphB = [];
-  Graph();
+  Graph(false, false, false);
 }
 
 // Проверка множеств
@@ -173,7 +203,7 @@ function Srez() {
 }
 
 // Настройка графика
-function Graph() {
+function Graph(setFillA, setFillB, setShow) {
   var speedData = {
     labels: [
       'СМ-1030А',
@@ -189,20 +219,31 @@ function Graph() {
       {
         label: 'A (со средней часовой производительностью)',
         data: GraphA,
-        fill: false,
+        fill: setFillA,
         lineTension: 0,
-        pointRadius: 9,
+        pointRadius: 5,
         borderColor: 'rgba(255, 99, 132, 0.3)',
-        backgroundColor: 'rgba(255, 99, 132, 0.3)',
+        backgroundColor: 'rgba(128,128,128, 0.15)',
+        pointBackgroundColor: 'rgba(255, 255, 255, 0)',
       },
       {
         label: 'B (с высокой установленной мощностью)',
         data: GraphB,
-        fill: false,
+        fill: setFillB,
         lineTension: 0,
         borderColor: 'rgba(0, 183, 255, 0.3)',
-        backgroundColor: 'rgba(0, 183, 255, 0.3)',
-        pointRadius: 9,
+        backgroundColor: 'rgba(128,128,128, 0.15)',
+        pointRadius: 5,
+        pointBackgroundColor: 'rgba(255, 255, 255, 0)',
+      },
+      {
+        label: 'Пересечение',
+        data: GraphC,
+        fill: true,
+        lineTension: 0,
+        borderColor: 'rgba(128,128,128, 0.15)',
+        backgroundColor: 'rgba(128,128,128, 0.15)',
+        showLine: setShow,
       },
     ],
   };
