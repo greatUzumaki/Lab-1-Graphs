@@ -92,7 +92,7 @@ function Pclass(x, max, mid) {
 function Func() {
   // График
   if (document.getElementById('f1').checked) {
-    Graph(false, false);
+    Graph(false, false, false);
   }
   // Объединение
   else if (document.getElementById('f2').checked) {
@@ -124,11 +124,31 @@ function Func() {
   }
   // Дополнение A
   else if (document.getElementById('f6').checked) {
-    alert('Дополнение1');
+    GraphA = GraphA.map(Number);
+    let forSort = GraphA;
+    forSort = forSort.map(Number);
+    forSort.sort((a, b) => a - b);
+    let max = forSort[7];
+    GraphA = GraphA.map((x) => {
+      let answer;
+      answer = max - x;
+      return answer.toFixed(3);
+    });
+    Graph(false, false, false);
   }
   // Дополнение B
   else if (document.getElementById('f7').checked) {
-    alert('Дополнение2');
+    GraphB = GraphB.map(Number);
+    let forSort = GraphB;
+    forSort = forSort.map(Number);
+    forSort.sort((a, b) => a - b);
+    let max = forSort[7];
+    GraphB = GraphB.map((x) => {
+      let answer;
+      answer = max - x;
+      return answer.toFixed(3);
+    });
+    Graph(false, false, false);
   } else alert('Выберите функцию!');
 }
 
@@ -136,6 +156,7 @@ function Func() {
 function Kill() {
   GraphA = [];
   GraphB = [];
+  GraphC = [];
   Graph(false, false, false);
 }
 
