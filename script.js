@@ -200,6 +200,16 @@ function Index() {
     return minArr;
   }
 
+  function Max(arr1, arr2) {
+    let maxArr = [];
+    for (let i = 0; i < arr1.length; i++) {
+      if (arr1[i] >= arr2[i]) {
+        maxArr.push(arr1[i]);
+      } else maxArr.push(arr2[i]);
+    }
+    return maxArr;
+  }
+
   function arraySum(array) {
     let sum = 0;
     for (let i = 0; i < array.length; i++) {
@@ -214,6 +224,14 @@ function Index() {
       sum += Math.pow(array[i], 2);
     }
     return sum;
+  }
+
+  function SumRazn(arr1, arr2) {
+    let sum = 0;
+    for (let i = 0; i < arr1.length; i++) {
+      sum += Math.pow(arr1[i] - arr2[i], 2);
+    }
+    return Math.sqrt(sum);
   }
 
   function Hamming(arr1, arr2) {
@@ -235,11 +253,11 @@ function Index() {
   let linB = (2 / 8) * sumB;
   document.getElementById('in2').value = linB.toFixed(3);
   // Квадратичный индекс A
-  let sumPowA = arraySumPow(GraphA);
+  let sumPowA = arraySumPow(minA);
   let kvadrA = (2 / Math.sqrt(8)) * Math.sqrt(sumPowA);
   document.getElementById('in3').value = kvadrA.toFixed(3);
   // Квадратичный индекс B
-  let sumPowB = arraySumPow(GraphB);
+  let sumPowB = arraySumPow(minB);
   let kvadrB = (2 / Math.sqrt(8)) * Math.sqrt(sumPowB);
   document.getElementById('in4').value = kvadrB.toFixed(3);
   // Егер A p=1
@@ -251,13 +269,25 @@ function Index() {
   let egerB1 = 1 - hamB / 8;
   document.getElementById('in6').value = egerB1.toFixed(3);
   // Егер A p=2
-  document.getElementById('in7').value = 12;
+  let evklidA = SumRazn(GraphA, GraphAn);
+  let egerA2 = 1 - evklidA / Math.sqrt(8);
+  document.getElementById('in7').value = egerA2.toFixed(3);
   // Егер B p=2
-  document.getElementById('in8').value = 12;
+  let evklidB = SumRazn(GraphB, GraphBn);
+  let egerB2 = 1 - evklidB / Math.sqrt(8);
+  document.getElementById('in8').value = egerB2.toFixed(3);
   // Коско A
-  document.getElementById('in9').value = 12;
+  let maxA = Max(GraphA, GraphAn);
+  let maxSumKoskoA = arraySum(maxA);
+  let minSumKoskoA = arraySum(minA);
+  let koskoA = minSumKoskoA / maxSumKoskoA;
+  document.getElementById('in9').value = koskoA.toFixed(3);
   // Коско B
-  document.getElementById('in10').value = 12;
+  let maxB = Max(GraphB, GraphBn);
+  let maxSumKoskoB = arraySum(maxB);
+  let minSumKoskoB = arraySum(minB);
+  let koskoB = minSumKoskoB / maxSumKoskoB;
+  document.getElementById('in10').value = koskoB.toFixed(3);
 }
 
 // Альфа срез
