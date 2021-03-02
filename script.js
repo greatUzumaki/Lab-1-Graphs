@@ -372,6 +372,15 @@ function Graph(setFillA, setFillB, setShow) {
   };
 
   var chartOptions = {
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      ],
+    },
     legend: {
       display: true,
       position: 'top',
