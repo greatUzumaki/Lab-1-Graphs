@@ -160,15 +160,31 @@ function Kill() {
 
 // Проверка множеств
 function Check() {
-  if (document.getElementById('p1').checked) {
-    alert('done');
+  // A в B
+  outer: if (document.getElementById('p1').checked) {
+    for (let i = 0; i < GraphB.length; i++) {
+      if (GraphA[i] < GraphB[i]) continue;
+      else alert('A не содержится в B');
+      break outer;
+    }
+    alert('A содержится в B');
   }
-  if (document.getElementById('p2').checked) {
-    alert('done');
+  // B в A
+  outer: if (document.getElementById('p2').checked) {
+    for (let i = 0; i < GraphB.length; i++) {
+      if (GraphA[i] > GraphB[i]) continue;
+      else alert('B не содержится в A');
+      break outer;
+    }
+    alert('B содержится в A');
   }
+  // Равенство
   if (document.getElementById('p3').checked) {
-    alert('done');
-  } else alert('Выберите проверку!');
+    let arrA = GraphA;
+    let arrB = GraphB;
+    if (JSON.stringify(arrA) == JSON.stringify(arrB)) alert('A и B равны');
+    else alert('A и B не равны!');
+  }
 }
 
 // Индексы
