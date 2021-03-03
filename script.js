@@ -155,6 +155,32 @@ function Kill() {
   GraphA = [];
   GraphB = [];
   GraphC = [];
+  document.getElementById('b1').value = '';
+  document.getElementById('b2').value = '';
+  document.getElementById('b3').value = '';
+  document.getElementById('b4').value = '';
+  document.getElementById('b5').value = '';
+  document.getElementById('b6').value = '';
+  document.getElementById('b7').value = '';
+  document.getElementById('b8').value = '';
+  document.getElementById('a1').value = '';
+  document.getElementById('a2').value = '';
+  document.getElementById('a3').value = '';
+  document.getElementById('a4').value = '';
+  document.getElementById('a5').value = '';
+  document.getElementById('a6').value = '';
+  document.getElementById('a7').value = '';
+  document.getElementById('a8').value = '';
+  document.getElementById('in1').value = '';
+  document.getElementById('in2').value = '';
+  document.getElementById('in3').value = '';
+  document.getElementById('in4').value = '';
+  document.getElementById('in5').value = '';
+  document.getElementById('in6').value = '';
+  document.getElementById('in7').value = '';
+  document.getElementById('in8').value = '';
+  document.getElementById('in9').value = '';
+  document.getElementById('in10').value = '';
   Graph(false, false, false);
 }
 
@@ -189,121 +215,124 @@ function Check() {
 
 // Индексы
 function Index() {
-  GraphA = GraphA.map(Number);
-  GraphB = GraphB.map(Number);
+  if (GraphA.length == 0) alert('Нет значений');
+  else {
+    GraphA = GraphA.map(Number);
+    GraphB = GraphB.map(Number);
 
-  let GraphAn = GraphA.map((x) => {
-    let answer;
-    answer = Math.abs(x - 1);
-    return answer.toFixed(3);
-  });
-  GraphAn = GraphAn.map(Number);
+    let GraphAn = GraphA.map((x) => {
+      let answer;
+      answer = Math.abs(x - 1);
+      return answer.toFixed(3);
+    });
+    GraphAn = GraphAn.map(Number);
 
-  let GraphBn = GraphB.map((x) => {
-    let answer;
-    answer = Math.abs(x - 1);
-    return answer.toFixed(3);
-  });
-  GraphBn = GraphBn.map(Number);
+    let GraphBn = GraphB.map((x) => {
+      let answer;
+      answer = Math.abs(x - 1);
+      return answer.toFixed(3);
+    });
+    GraphBn = GraphBn.map(Number);
 
-  function Min(arr1, arr2) {
-    let minArr = [];
-    for (let i = 0; i < arr1.length; i++) {
-      if (arr1[i] >= arr2[i]) {
-        minArr.push(arr2[i]);
-      } else minArr.push(arr1[i]);
+    function Min(arr1, arr2) {
+      let minArr = [];
+      for (let i = 0; i < arr1.length; i++) {
+        if (arr1[i] >= arr2[i]) {
+          minArr.push(arr2[i]);
+        } else minArr.push(arr1[i]);
+      }
+      return minArr;
     }
-    return minArr;
-  }
 
-  function Max(arr1, arr2) {
-    let maxArr = [];
-    for (let i = 0; i < arr1.length; i++) {
-      if (arr1[i] >= arr2[i]) {
-        maxArr.push(arr1[i]);
-      } else maxArr.push(arr2[i]);
+    function Max(arr1, arr2) {
+      let maxArr = [];
+      for (let i = 0; i < arr1.length; i++) {
+        if (arr1[i] >= arr2[i]) {
+          maxArr.push(arr1[i]);
+        } else maxArr.push(arr2[i]);
+      }
+      return maxArr;
     }
-    return maxArr;
-  }
 
-  function arraySum(array) {
-    let sum = 0;
-    for (let i = 0; i < array.length; i++) {
-      sum += array[i];
+    function arraySum(array) {
+      let sum = 0;
+      for (let i = 0; i < array.length; i++) {
+        sum += array[i];
+      }
+      return sum;
     }
-    return sum;
-  }
 
-  function arraySumPow(array) {
-    let sum = 0;
-    for (let i = 0; i < array.length; i++) {
-      sum += Math.pow(array[i], 2);
+    function arraySumPow(array) {
+      let sum = 0;
+      for (let i = 0; i < array.length; i++) {
+        sum += Math.pow(array[i], 2);
+      }
+      return sum;
     }
-    return sum;
-  }
 
-  function SumRazn(arr1, arr2) {
-    let sum = 0;
-    for (let i = 0; i < arr1.length; i++) {
-      sum += Math.pow(arr1[i] - arr2[i], 2);
+    function SumRazn(arr1, arr2) {
+      let sum = 0;
+      for (let i = 0; i < arr1.length; i++) {
+        sum += Math.pow(arr1[i] - arr2[i], 2);
+      }
+      return Math.sqrt(sum);
     }
-    return Math.sqrt(sum);
-  }
 
-  function Hamming(arr1, arr2) {
-    let sum = 0;
-    for (let i = 0; i < arr1.length; i++) {
-      sum += Math.abs(arr1[i] - arr2[i]);
+    function Hamming(arr1, arr2) {
+      let sum = 0;
+      for (let i = 0; i < arr1.length; i++) {
+        sum += Math.abs(arr1[i] - arr2[i]);
+      }
+      return sum;
     }
-    return sum;
-  }
 
-  // Линейный индекс A
-  let minA = Min(GraphA, GraphAn);
-  let sumA = arraySum(minA);
-  let linA = (2 / 8) * sumA;
-  document.getElementById('in1').value = linA.toFixed(3);
-  // Линейный индекс B
-  let minB = Min(GraphB, GraphBn);
-  let sumB = arraySum(minB);
-  let linB = (2 / 8) * sumB;
-  document.getElementById('in2').value = linB.toFixed(3);
-  // Квадратичный индекс A
-  let sumPowA = arraySumPow(minA);
-  let kvadrA = (2 / Math.sqrt(8)) * Math.sqrt(sumPowA);
-  document.getElementById('in3').value = kvadrA.toFixed(3);
-  // Квадратичный индекс B
-  let sumPowB = arraySumPow(minB);
-  let kvadrB = (2 / Math.sqrt(8)) * Math.sqrt(sumPowB);
-  document.getElementById('in4').value = kvadrB.toFixed(3);
-  // Егер A p=1
-  let hamA = Hamming(GraphA, GraphAn);
-  let egerA1 = 1 - hamA / 8;
-  document.getElementById('in5').value = egerA1.toFixed(3);
-  // Егер B p=1
-  let hamB = Hamming(GraphB, GraphBn);
-  let egerB1 = 1 - hamB / 8;
-  document.getElementById('in6').value = egerB1.toFixed(3);
-  // Егер A p=2
-  let evklidA = SumRazn(GraphA, GraphAn);
-  let egerA2 = 1 - evklidA / Math.sqrt(8);
-  document.getElementById('in7').value = egerA2.toFixed(3);
-  // Егер B p=2
-  let evklidB = SumRazn(GraphB, GraphBn);
-  let egerB2 = 1 - evklidB / Math.sqrt(8);
-  document.getElementById('in8').value = egerB2.toFixed(3);
-  // Коско A
-  let maxA = Max(GraphA, GraphAn);
-  let maxSumKoskoA = arraySum(maxA);
-  let minSumKoskoA = arraySum(minA);
-  let koskoA = minSumKoskoA / maxSumKoskoA;
-  document.getElementById('in9').value = koskoA.toFixed(3);
-  // Коско B
-  let maxB = Max(GraphB, GraphBn);
-  let maxSumKoskoB = arraySum(maxB);
-  let minSumKoskoB = arraySum(minB);
-  let koskoB = minSumKoskoB / maxSumKoskoB;
-  document.getElementById('in10').value = koskoB.toFixed(3);
+    // Линейный индекс A
+    let minA = Min(GraphA, GraphAn);
+    let sumA = arraySum(minA);
+    let linA = (2 / 8) * sumA;
+    document.getElementById('in1').value = linA.toFixed(3);
+    // Линейный индекс B
+    let minB = Min(GraphB, GraphBn);
+    let sumB = arraySum(minB);
+    let linB = (2 / 8) * sumB;
+    document.getElementById('in2').value = linB.toFixed(3);
+    // Квадратичный индекс A
+    let sumPowA = arraySumPow(minA);
+    let kvadrA = (2 / Math.sqrt(8)) * Math.sqrt(sumPowA);
+    document.getElementById('in3').value = kvadrA.toFixed(3);
+    // Квадратичный индекс B
+    let sumPowB = arraySumPow(minB);
+    let kvadrB = (2 / Math.sqrt(8)) * Math.sqrt(sumPowB);
+    document.getElementById('in4').value = kvadrB.toFixed(3);
+    // Егер A p=1
+    let hamA = Hamming(GraphA, GraphAn);
+    let egerA1 = 1 - hamA / 8;
+    document.getElementById('in5').value = egerA1.toFixed(3);
+    // Егер B p=1
+    let hamB = Hamming(GraphB, GraphBn);
+    let egerB1 = 1 - hamB / 8;
+    document.getElementById('in6').value = egerB1.toFixed(3);
+    // Егер A p=2
+    let evklidA = SumRazn(GraphA, GraphAn);
+    let egerA2 = 1 - evklidA / Math.sqrt(8);
+    document.getElementById('in7').value = egerA2.toFixed(3);
+    // Егер B p=2
+    let evklidB = SumRazn(GraphB, GraphBn);
+    let egerB2 = 1 - evklidB / Math.sqrt(8);
+    document.getElementById('in8').value = egerB2.toFixed(3);
+    // Коско A
+    let maxA = Max(GraphA, GraphAn);
+    let maxSumKoskoA = arraySum(maxA);
+    let minSumKoskoA = arraySum(minA);
+    let koskoA = minSumKoskoA / maxSumKoskoA;
+    document.getElementById('in9').value = koskoA.toFixed(3);
+    // Коско B
+    let maxB = Max(GraphB, GraphBn);
+    let maxSumKoskoB = arraySum(maxB);
+    let minSumKoskoB = arraySum(minB);
+    let koskoB = minSumKoskoB / maxSumKoskoB;
+    document.getElementById('in10').value = koskoB.toFixed(3);
+  }
 }
 
 // Альфа срез

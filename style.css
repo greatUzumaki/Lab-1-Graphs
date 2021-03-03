@@ -80,17 +80,13 @@ th {
 
 .buttons .button {
   cursor: pointer;
-  width: 100px;
+  width: 120px;
   height: 45px;
   border-radius: 10px;
   outline: none;
 }
 
 .buttons .button:hover {
-  cursor: pointer;
-  width: 100px;
-  height: 45px;
-  border-radius: 10px;
   background-color: azure;
 }
 
