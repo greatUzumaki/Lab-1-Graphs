@@ -122,11 +122,33 @@ function Func() {
   }
   // Разность A и B
   else if (document.getElementById('f4').checked) {
-    alert('Разность1');
+    GraphB = GraphB.map(Number);
+    GraphB = GraphB.map((x) => {
+      let answer;
+      answer = Math.abs(x - 1);
+      return answer.toFixed(3);
+    });
+    GraphA = GraphA.map(Number);
+    for (let i = 0; i < GraphA.length; i++) {
+      if (GraphB[i] >= GraphA[i]) GraphC.push(GraphA[i]);
+      else GraphC.push(GraphB[i]);
+    }
+    Graph(false, false, true);
   }
   // Разность B и A
   else if (document.getElementById('f5').checked) {
-    alert('Разность2');
+    GraphA = GraphA.map(Number);
+    GraphA = GraphA.map((x) => {
+      let answer;
+      answer = Math.abs(x - 1);
+      return answer.toFixed(3);
+    });
+    GraphB = GraphB.map(Number);
+    for (let i = 0; i < GraphB.length; i++) {
+      if (GraphA[i] >= GraphB[i]) GraphC.push(GraphB[i]);
+      else GraphC.push(GraphA[i]);
+    }
+    Graph(false, false, true);
   }
   // Дополнение A
   else if (document.getElementById('f6').checked) {
