@@ -49,7 +49,7 @@ function Edit() {
   minB = forSortB[0];
   maxB = forSortB[7];
   midB = (maxB + minB) / 2;
-  GraphA = znachA.map((x) => Pclass(x, maxA, midA));
+  GraphA = znachA.map((x) => Pclass(x, minA, midA, maxA));
   document.getElementById('a1').value = GraphA[0];
   document.getElementById('a2').value = GraphA[1];
   document.getElementById('a3').value = GraphA[2];
@@ -86,9 +86,11 @@ function Sclass(x, a, b, c) {
   return answer.toFixed(3);
 }
 
-function Pclass(x, max, mid) {
-  if (x <= max) {
-    return Sclass(x, max - mid, max - mid / 2, max);
+function Pclass(x, min, mid, max) {
+  if (x <= mid) {
+    return Sclass(x, min, (min + mid) / 2, mid);
+  } else {
+    return 1 - Sclass(x, mid, (mid + max) / 2, max);
   }
 }
 
@@ -360,7 +362,7 @@ function Index() {
 // Альфа срез
 function Srez() {
   let a1 = document.getElementById('a1').value;
-  if (a1 == 0) alert('Нет значений!');
+  if (a1 == '') alert('Нет значений!');
   else {
     let a2 = document.getElementById('a2').value;
     let a3 = document.getElementById('a3').value;
@@ -382,8 +384,28 @@ function Srez() {
     let B = [b1, b2, b3, b4, b5, b6, b7, b8];
     A = A.map(Number);
     B = B.map(Number);
-    let srezA = A.filter((x) => x >= srez);
-    let srezB = B.filter((x) => x >= srez);
+    let names = [
+      'СМ-1030А',
+      'СМС-1062',
+      'СМ-19А',
+      'ВСКО-9',
+      'Дорстенер 203',
+      '«Ротомат»',
+      'Р-550',
+      '«Атлас-Интертехник»',
+    ];
+    let srezA = A.map((x, index) => {
+      if (x >= srez) {
+        return names[index];
+      }
+    });
+    srezA = srezA.filter((x) => x != undefined);
+    let srezB = B.map((x, index) => {
+      if (x >= srez) {
+        return names[index];
+      }
+    });
+    srezB = srezB.filter((x) => x != undefined);
     alert(
       `Разложение множества A: \n ${srezA.join(
         ' | '
