@@ -32,9 +32,9 @@ function Edit() {
   let isA8 = document.getElementById('isA8').value;
   let isB8 = document.getElementById('isB8').value;
   let znachA = [isA1, isA2, isA3, isA4, isA5, isA6, isA7, isA8];
-  let forSortA = [isA1, isA2, isA3, isA4, isA5, isA6, isA7, isA8];
+  let forSortA = znachA.slice();
   let znachB = [isB1, isB2, isB3, isB4, isB5, isB6, isB7, isB8];
-  let forSortB = [isB1, isB2, isB3, isB4, isB5, isB6, isB7, isB8];
+  let forSortB = znachB.slice();
   znachA = znachA.map(Number);
   znachB = znachB.map(Number);
   forSortA = forSortA.map(Number);
@@ -50,6 +50,13 @@ function Edit() {
   maxB = forSortB[7];
   midB = (maxB + minB) / 2;
   GraphA = znachA.map((x) => Pclass(x, minA, midA, maxA));
+  let forSort = GraphA.slice();
+  forSort.sort((a, b) => a - b);
+  maxA = forSort[7];
+  GraphA = GraphA.map((x) => {
+    let result = x / maxA;
+    return result.toFixed(3);
+  });
   document.getElementById('a1').value = GraphA[0];
   document.getElementById('a2').value = GraphA[1];
   document.getElementById('a3').value = GraphA[2];
