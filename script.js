@@ -53,27 +53,22 @@ function Edit() {
   let forSort = GraphA.slice();
   forSort.sort((a, b) => a - b);
   maxA = forSort[7];
+
   GraphA = GraphA.map((x) => {
     let result = x / maxA;
     return result.toFixed(3);
   });
-  document.getElementById('a1').value = GraphA[0];
-  document.getElementById('a2').value = GraphA[1];
-  document.getElementById('a3').value = GraphA[2];
-  document.getElementById('a4').value = GraphA[3];
-  document.getElementById('a5').value = GraphA[4];
-  document.getElementById('a6').value = GraphA[5];
-  document.getElementById('a7').value = GraphA[6];
-  document.getElementById('a8').value = GraphA[7];
+
+  for (let i = 0, arrLen = GraphA.length; i < arrLen; i++) {
+    document.getElementById(`a${i + 1}`).value = GraphA[i];
+  }
+
   GraphB = znachB.map((x) => Sclass(x, minB, midB, maxB));
-  document.getElementById('b1').value = GraphB[0];
-  document.getElementById('b2').value = GraphB[1];
-  document.getElementById('b3').value = GraphB[2];
-  document.getElementById('b4').value = GraphB[3];
-  document.getElementById('b5').value = GraphB[4];
-  document.getElementById('b6').value = GraphB[5];
-  document.getElementById('b7').value = GraphB[6];
-  document.getElementById('b8').value = GraphB[7];
+
+  for (let i = 0, arrLen = GraphB.length; i < arrLen; i++) {
+    document.getElementById(`b${i + 1}`).value = GraphB[i];
+  }
+
   defGraphA = GraphA;
   defGraphB = GraphB;
   Graph(false, false);
@@ -109,6 +104,7 @@ function Func() {
     GraphB = defGraphB;
     Graph(false, false, false);
   }
+
   // Объединение
   else if (document.getElementById('f2').checked) {
     GraphA = GraphA.map(Number);
@@ -119,6 +115,7 @@ function Func() {
     }
     Graph(false, false, true);
   }
+
   // Пересечение
   else if (document.getElementById('f3').checked) {
     GraphA = GraphA.map(Number);
@@ -129,6 +126,7 @@ function Func() {
     }
     Graph(false, false, true);
   }
+
   // Разность A и B
   else if (document.getElementById('f4').checked) {
     GraphB = GraphB.map(Number);
@@ -144,6 +142,7 @@ function Func() {
     }
     Graph(false, false, true);
   }
+
   // Разность B и A
   else if (document.getElementById('f5').checked) {
     GraphA = GraphA.map(Number);
@@ -159,6 +158,7 @@ function Func() {
     }
     Graph(false, false, true);
   }
+
   // Дополнение A
   else if (document.getElementById('f6').checked) {
     GraphA = GraphA.map(Number);
@@ -186,32 +186,40 @@ function Kill() {
   GraphA = [];
   GraphB = [];
   GraphC = [];
-  document.getElementById('b1').value = '';
-  document.getElementById('b2').value = '';
-  document.getElementById('b3').value = '';
-  document.getElementById('b4').value = '';
-  document.getElementById('b5').value = '';
-  document.getElementById('b6').value = '';
-  document.getElementById('b7').value = '';
-  document.getElementById('b8').value = '';
-  document.getElementById('a1').value = '';
-  document.getElementById('a2').value = '';
-  document.getElementById('a3').value = '';
-  document.getElementById('a4').value = '';
-  document.getElementById('a5').value = '';
-  document.getElementById('a6').value = '';
-  document.getElementById('a7').value = '';
-  document.getElementById('a8').value = '';
-  document.getElementById('in1').value = '';
-  document.getElementById('in2').value = '';
-  document.getElementById('in3').value = '';
-  document.getElementById('in4').value = '';
-  document.getElementById('in5').value = '';
-  document.getElementById('in6').value = '';
-  document.getElementById('in7').value = '';
-  document.getElementById('in8').value = '';
-  document.getElementById('in9').value = '';
-  document.getElementById('in10').value = '';
+
+  const elems = [
+    'b1',
+    'b2',
+    'b3',
+    'b4',
+    'b5',
+    'b6',
+    'b7',
+    'b8',
+    'a1',
+    'a2',
+    'a3',
+    'a4',
+    'a5',
+    'a6',
+    'a7',
+    'a8',
+    'in1',
+    'in2',
+    'in3',
+    'in4',
+    'in5',
+    'in6',
+    'in7',
+    'in8',
+    'in9',
+    'in10',
+  ];
+
+  for (let i = 0, arrLen = elems.length; i < arrLen; i++) {
+    document.getElementById(elems[i]).value = '';
+  }
+
   Graph(false, false, false);
 }
 
@@ -226,6 +234,7 @@ function Check() {
     }
     alert('A содержится в B');
   }
+
   // B в A
   outer: if (document.getElementById('p2').checked) {
     for (let i = 0; i < GraphB.length; i++) {
@@ -235,6 +244,7 @@ function Check() {
     }
     alert('B содержится в A');
   }
+
   // Равенство
   if (document.getElementById('p3').checked) {
     let arrA = GraphA;
@@ -322,41 +332,50 @@ function Index() {
     let sumA = arraySum(minA);
     let linA = (2 / 8) * sumA;
     document.getElementById('in1').value = linA.toFixed(3);
+
     // Линейный индекс B
     let minB = Min(GraphB, GraphBn);
     let sumB = arraySum(minB);
     let linB = (2 / 8) * sumB;
     document.getElementById('in2').value = linB.toFixed(3);
+
     // Квадратичный индекс A
     let sumPowA = arraySumPow(minA);
     let kvadrA = (2 / Math.sqrt(8)) * Math.sqrt(sumPowA);
     document.getElementById('in3').value = kvadrA.toFixed(3);
+
     // Квадратичный индекс B
     let sumPowB = arraySumPow(minB);
     let kvadrB = (2 / Math.sqrt(8)) * Math.sqrt(sumPowB);
     document.getElementById('in4').value = kvadrB.toFixed(3);
+
     // Егер A p=1
     let hamA = Hamming(GraphA, GraphAn);
     let egerA1 = 1 - hamA / 8;
     document.getElementById('in5').value = egerA1.toFixed(3);
+
     // Егер B p=1
     let hamB = Hamming(GraphB, GraphBn);
     let egerB1 = 1 - hamB / 8;
     document.getElementById('in6').value = egerB1.toFixed(3);
+
     // Егер A p=2
     let evklidA = SumRazn(GraphA, GraphAn);
     let egerA2 = 1 - evklidA / Math.sqrt(8);
     document.getElementById('in7').value = egerA2.toFixed(3);
+
     // Егер B p=2
     let evklidB = SumRazn(GraphB, GraphBn);
     let egerB2 = 1 - evklidB / Math.sqrt(8);
     document.getElementById('in8').value = egerB2.toFixed(3);
+
     // Коско A
     let maxA = Max(GraphA, GraphAn);
     let maxSumKoskoA = arraySum(maxA);
     let minSumKoskoA = arraySum(minA);
     let koskoA = minSumKoskoA / maxSumKoskoA;
     document.getElementById('in9').value = koskoA.toFixed(3);
+
     // Коско B
     let maxB = Max(GraphB, GraphBn);
     let maxSumKoskoB = arraySum(maxB);
@@ -423,7 +442,7 @@ function Srez() {
 
 // Настройка графика
 function Graph(setFillA, setFillB, setShow) {
-  var speedData = {
+  let speedData = {
     labels: [
       'СМ-1030А',
       'СМС-1062',
@@ -467,7 +486,7 @@ function Graph(setFillA, setFillB, setShow) {
     ],
   };
 
-  var chartOptions = {
+  let chartOptions = {
     scales: {
       yAxes: [
         {
@@ -487,7 +506,7 @@ function Graph(setFillA, setFillB, setShow) {
     },
   };
 
-  var lineChart = new Chart(speedCanvas, {
+  let lineChart = new Chart(speedCanvas, {
     type: 'line',
     data: speedData,
     options: chartOptions,
